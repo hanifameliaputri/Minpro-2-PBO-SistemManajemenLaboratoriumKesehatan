@@ -1,240 +1,420 @@
-# Minpro-1-PBO-SistemManajemenLaboratoriumKesehatan
+# Minpro-2-PBO-SistemManajemenLaboratoriumKesehatan
 
-Nama: Hanif Amelia Putri
+**Nama:** Hanif Amelia Putri  
+**Kelas:** B  
+**NIM:** 2509116075  
 
-Kelas: B
+## 1. Deskripsi Program
 
-NIM: 2509116075
+Sistem Manajemen Laboratorium Kesehatan adalah program berbasis Java yang digunakan untuk mengelola data pasien, petugas laboratorium, jenis pemeriksaan, dan hasil pemeriksaan.
 
-## 1. Deskripsi Singkat Program
+Program ini merupakan pengembangan dari Mini Project 1 dengan menerapkan beberapa konsep Pemrograman Berorientasi Objek (PBO), seperti **encapsulation, inheritance, overriding, polymorphism, constructor, access modifier, getter dan setter**, serta validasi input.
 
-Sistem Manajemen Laboratorium Kesehatan adalah program sederhana berbasis Java yang digunakan untuk mengelola daftar jenis pemeriksaan dan biaya pemeriksaan di laboratorium kesehatan, seperti cek darah dan cek gula darah. Setiap data memiliki tiga informasi, yaitu ID pemeriksaan, nama pemeriksaan, dan biaya pemeriksaan. ID dibuat secara otomatis oleh sistem, misalnya PM1 dan PM2.
+Program juga menggunakan `ArrayList` untuk menyimpan data selama program berjalan dan menyediakan dummy data agar pengguna dapat langsung melihat data ketika program dijalankan.
 
-Programini memiliki enam pilihan menu, yaitu Tambah Pemeriksaan, Lihat Pemeriksaan, Cari Pemeriksaan, Ubah Pemeriksaan, Hapus Pemeriksaan, dan Keluar. Pengguna dapat mencari, mengubah, atau menghapus data berdasarkan ID pemeriksaan.
+---
 
-Program menerapkan konsep Pemrograman Berorientasi Objek (PBO) dan menggunakan ArrayList untuk menyimpan data selama program berjalan. Validasi input digunakan untuk menolak pilihan menu yang bukan angka, biaya yang bukan angka atau bernilai negatif, serta nama pemeriksaan yang kosong. Data yang dimasukkan akan hilang ketika program ditutup.
+## 2. Fitur Program
 
-## 2. Tujuan Program
+Program memiliki beberapa fitur utama, yaitu:
 
-Program ini dibuat untuk memenuhi tugas mini project Pemrograman Berorientasi Objek dengan menerapkan operasi CRUD (Create, Read, Update, Delete) pada data pemeriksaan laboratorium kesehatan.
+- Pendaftaran pemeriksaan
+- Mengelola data pasien
+- Mengelola data petugas
+- Mengelola data pemeriksaan
+- Mengelola hasil pemeriksaan
+- Menambah, melihat, mencari, mengubah, dan menghapus data tertentu
+- Validasi input pengguna
+- Menampilkan riwayat hasil pemeriksaan berdasarkan pasien
+- Menggunakan dummy data pada saat program pertama kali dijalankan
 
-Tujuan program adalah:
+---
 
-- Memudahkan pencatatan nama jenis pemeriksaan dan biayanya.
-- Menampilkan daftar pemeriksaan yang telah ditambahkan.
-- Memudahkan pencarian data pemeriksaan berdasarkan ID.
-- Memungkinkan perubahan nama dan biaya pemeriksaan.
-- Menghapus data pemeriksaan yang tidak diperlukan.
+## 3. Alur Program
 
-## 3. Struktur Program
+Program dijalankan melalui class `Main.java`. Class tersebut memanggil `LaboratoriumController` untuk menjalankan program.
 
-Program ini terdiri dari beberapa class yang digunakan untuk menjalankan sistem manajemen laboratorium kesehatan.
-
-| No. | Class | Fungsi |
-|---|---|---|
-| 1 | `Main.java` | Menjalankan program, menampilkan menu, menerima input pengguna, dan menjalankan fitur sesuai pilihan menu. |
-| 2 | `LaboratoriumService.java` | Mengelola data pemeriksaan menggunakan `ArrayList`, termasuk proses tambah, lihat, cari, ubah, dan hapus data. |
-| 3 | `Pemeriksaan.java` | Membuat objek pemeriksaan yang memiliki ID, nama pemeriksaan, dan biaya. |
-| 4 | `Pasien.java` | Menyimpan data pasien berupa ID pasien, nama pasien, umur, dan jenis kelamin. |
-| 5 | `HasilPemeriksaan.java` | Menyimpan data hasil pemeriksaan berupa ID hasil, ID pasien, hasil pemeriksaan, dan status. |
-
-### Hubungan Antarclass
-
-Class `Main` menerima input dari pengguna dan memanggil method pada class `LaboratoriumService`. Selanjutnya, `LaboratoriumService` mengelola objek `Pemeriksaan` yang disimpan menggunakan `ArrayList`.
-
-### Struktur Project di NetBeans
+Alur utama program:
 
 ```text
-LaboratoriumKesehatan
-├── Source Packages
-│   └── laboratoriumkesehatan
-│       ├── HasilPemeriksaan.java
-│       ├── LaboratoriumService.java
-│       ├── Main.java
-│       ├── Pasien.java
-│       └── Pemeriksaan.java
-├── Test Packages
-├── Dependencies
-├── Java Dependencies
-└── Project Files
+Main
+  ↓
+LaboratoriumController
+  ↓
+Menu Utama
+  ├── 1. Pendaftaran Pemeriksaan
+  ├── 2. Kelola Pasien
+  ├── 3. Kelola Petugas
+  ├── 4. Kelola Pemeriksaan
+  ├── 5. Kelola Hasil Pemeriksaan
+  └── 6. Keluar
 ```
 
-## 5. Menu Program
+### 1. Pendaftaran Pemeriksaan
 
-Program memiliki enam menu utama:
+Pada menu ini pengguna dapat melakukan pendaftaran pemeriksaan.
 
-```text
-==================================================
-   SISTEM MANAJEMEN LABORATORIUM KESEHATAN
-==================================================
-1. Tambah Pemeriksaan
-2. Lihat Pemeriksaan
-3. Cari Pemeriksaan
-4. Ubah Pemeriksaan
-5. Hapus Pemeriksaan
-6. Keluar
-==================================================
-```
+Pengguna dapat memilih:
 
-### 1. Tambah Pemeriksaan
+- Pasien baru
+- Pasien yang sudah terdaftar
 
-Digunakan untuk memasukkan data pemeriksaan baru. Pengguna mengisi nama dan biaya pemeriksaan. ID pemeriksaan dibuat otomatis oleh sistem.
+Setelah pasien dipilih, pengguna memilih jenis pemeriksaan dan petugas yang menangani pemeriksaan.
 
-### 2. Lihat Pemeriksaan
+Setelah semua data dipilih, sistem menampilkan konfirmasi pendaftaran.
 
-Digunakan untuk menampilkan semua data pemeriksaan yang tersimpan di dalam `ArrayList`.
+### 2. Kelola Pasien
 
-### 3. Cari Pemeriksaan
+Menu ini digunakan untuk mengelola data pasien.
 
-Digunakan untuk mencari data berdasarkan ID pemeriksaan, seperti `PM1`.
+Fitur yang tersedia:
 
-### 4. Ubah Pemeriksaan
+- Tambah pasien
+- Lihat semua pasien
+- Cari pasien
+- Hapus pasien
 
-Digunakan untuk mengubah nama dan biaya pemeriksaan berdasarkan ID yang dipilih.
+### 3. Kelola Petugas
 
-### 5. Hapus Pemeriksaan
+Menu ini digunakan untuk mengelola data petugas laboratorium.
 
-Digunakan untuk menghapus data pemeriksaan berdasarkan ID.
+Pengguna dapat menambahkan:
+
+- Analis
+- Dokter
+
+Data kedua jenis petugas tersebut disimpan dalam satu `ArrayList<Petugas>`.
+
+### 4. Kelola Pemeriksaan
+
+Menu ini digunakan untuk mengelola jenis pemeriksaan laboratorium.
+
+Fitur yang tersedia:
+
+- Tambah pemeriksaan
+- Lihat semua pemeriksaan
+- Cari pemeriksaan
+- Ubah pemeriksaan
+- Hapus pemeriksaan
+
+### 5. Kelola Hasil Pemeriksaan
+
+Menu ini digunakan untuk mencatat dan melihat hasil pemeriksaan pasien.
+
+Fitur yang tersedia:
+
+- Input hasil pemeriksaan
+- Lihat semua hasil
+- Lihat riwayat hasil berdasarkan pasien
 
 ### 6. Keluar
 
-Digunakan untuk menghentikan program.
+Menu ini digunakan untuk menghentikan program.
 
+---
 
+## 4. Struktur Program
 
-## 6. Demo Program
+Program menggunakan pembagian package untuk memisahkan bagian-bagian program.
 
-### 1. Menu Utama
-
-<img width="773" height="359" alt="WhatsApp Image 2026-09-10 at 02 30 56" src="https://github.com/user-attachments/assets/44affbf6-3021-46aa-830c-c4b9665f4176" />
-
-
-Gambar tersebut menunjukkan menu utama Sistem Manajemen Laboratorium Kesehatan. Pengguna dapat memilih menu tambah, lihat, cari, ubah, hapus, atau keluar dengan memasukkan nomor pilihan.
-
-### 2. Tambah Pemeriksaan
-
-
-<img width="742" height="587" alt="WhatsApp Image 2026-09-10 at 02 04 55" src="https://github.com/user-attachments/assets/a5b7bf0c-bbb0-4f2b-a91d-e8216ddb603f" />
-
-
-
-Pada menu ini, pengguna memasukkan nama dan biaya pemeriksaan. Setelah data berhasil disimpan, program membuat ID pemeriksaan secara otomatis, seperti PM1.
-
-### 3. Lihat Pemeriksaan
-
-<img width="812" height="510" alt="image" src="https://github.com/user-attachments/assets/277aba30-dd31-41df-9d77-d97c478b17ab" />
-
-
-Menu ini menampilkan semua data pemeriksaan yang tersimpan di dalam ArrayList.
-
-### 4. Cari Pemeriksaan
-
-<img width="773" height="595" alt="image" src="https://github.com/user-attachments/assets/70ab3eb6-ac1f-4b64-a744-bc7dbfc2bded" />
-
-
-
-Pengguna memasukkan ID pemeriksaan untuk mencari data tertentu.
-
-### 5. Ubah Pemeriksaan
-
-<img width="741" height="575" alt="image" src="https://github.com/user-attachments/assets/25da5d1f-7352-4bb9-aded-865e77c62fe7" />
-
-
-Menu ini digunakan untuk mengubah nama dan biaya pemeriksaan berdasarkan ID.
-
-Setelah data diubah kita bisa lihat perubahannya dengan pilih menu 2.
-
-<img width="727" height="450" alt="image" src="https://github.com/user-attachments/assets/71fb4875-95be-40ba-a215-7353fcf95ec6" />
-
-
-
-### 6. Hapus Pemeriksaan
-
-<img width="722" height="531" alt="image" src="https://github.com/user-attachments/assets/784d126f-7454-40b4-86ac-f6ffdb12a847" />
-
-
-
-Menu ini digunakan untuk menghapus data pemeriksaan berdasarkan ID.
-
-Jika kita mau melihat apakah data sudah berhasil di hapus bisa dilihat kembali pada menu 2.
-
-<img width="766" height="402" alt="image" src="https://github.com/user-attachments/assets/4f582afa-f62a-4423-b43d-a947f2f2987b" />
-
-
-
-Gambar tersebut menunjukkan menu utama Sistem Manajemen Laboratorium Kesehatan. Pengguna dapat memilih menu tambah, lihat, cari, ubah, hapus, atau keluar dengan memasukkan nomor pilihan.
-
-
-### 7. Menu Keluar
-
-
-<img width="724" height="400" alt="image" src="https://github.com/user-attachments/assets/d76d4449-092f-49ca-ad78-566c3cfde991" />
-
-
-
-
-Ketika pengguna ingin keluar dari sistem.
-
-## 7. Penerapan Nilai Tambah
-
-### 1. Access Modifier
-
-
-<img width="319" height="137" alt="image" src="https://github.com/user-attachments/assets/b88439d0-8057-4e66-b1dc-340de0bdabb6" />
-
-
-Gambar di atas menunjukkan penggunaan access modifier `private` pada atribut class `HasilPemeriksaan`, yaitu `idHasil`, `idPasien`, `hasil`, dan `status`.
-
-Atribut tersebut dibuat `private` agar tidak dapat diakses secara langsung dari luar class. Untuk mengakses atau mengubah data, program menggunakan method `public`, seperti getter dan setter.
-
-Contoh kode yang terlihat pada gambar:
-
-```java
-private String idHasil;
-private String idPasien;
-private String hasil;
-private String status;
+```text
+LaboratoriumKesehatan
+│
+├── Main
+│   └── Main.java
+│
+├── controller
+│   └── LaboratoriumController.java
+│
+├── model
+│   ├── Pasien.java
+│   ├── Petugas.java
+│   ├── Analis.java
+│   ├── Dokter.java
+│   ├── Pemeriksaan.java
+│   └── HasilPemeriksaan.java
+│
+└── view
+    └── LaboratoriumView.java
 ```
 
-### 2. Encapsulation
+### Fungsi setiap package
 
-<img width="400" height="117" alt="image" src="https://github.com/user-attachments/assets/8af380df-64c1-491c-9c07-a45ac5b80bb6" />
+**Main**
 
-Gambar di atas menunjukkan penerapan encapsulation pada class `HasilPemeriksaan`. Atribut data tidak diakses secara langsung, tetapi melalui getter dan setter.
+Digunakan sebagai titik awal program. `Main.java` membuat objek `LaboratoriumController` dan menjalankan program.
 
+**Controller**
 
-### 3. Validasi Input
+`LaboratoriumController` mengatur proses program, seperti input data, pengelolaan `ArrayList`, pencarian, penambahan, perubahan, penghapusan, serta proses pendaftaran pemeriksaan.
+
+**Model**
+
+Berisi class yang merepresentasikan data dalam program, yaitu pasien, petugas, analis, dokter, pemeriksaan, dan hasil pemeriksaan.
+
+**View**
+
+`LaboratoriumView` digunakan untuk menampilkan menu, judul, pilihan, informasi data, dan pesan kepada pengguna.
+
+---
+
+## 5. Penerapan Encapsulation
+
+Encapsulation diterapkan dengan membuat atribut pada class menjadi `private`.
+
+Contohnya pada class `Pasien`:
 
 ```java
-if (!sc.hasNextInt()) {
-    System.out.println("Pilihan menu harus berupa angka.");
-    sc.nextLine();
-    continue;
+private String id;
+private String nama;
+private int umur;
+private String jenisKelamin;
+private String keluhan;
+```
+
+Atribut tersebut tidak dapat diakses secara langsung dari luar class. Untuk mengakses atau mengubah nilainya digunakan getter dan setter.
+
+Contohnya:
+
+```java
+public String getNama() {
+    return nama;
+}
+
+public void setNama(String nama) {
+    if (nama != null && !nama.trim().isEmpty()) {
+        this.nama = nama;
+    }
 }
 ```
-<img width="534" height="111" alt="image" src="https://github.com/user-attachments/assets/3e378ac7-c81f-4901-99c0-45382e3f5dc6" />
 
+Selain sebagai akses data, setter juga digunakan untuk melakukan validasi.
 
-Kode tersebut digunakan untuk memastikan pilihan menu berupa angka. Jika pengguna memasukkan huruf, program menampilkan pesan kesalahan dan kembali menampilkan menu.
-
-```java
-if (biaya < 0) {
-    System.out.println("Biaya tidak boleh negatif.");
-    return;
-}
-```
-<img width="457" height="77" alt="image" src="https://github.com/user-attachments/assets/4554fa48-1dca-47aa-8c6d-e2d9f2e8911b" />
-
-
-Kode tersebut digunakan untuk menolak biaya pemeriksaan yang bernilai negatif.
+Contohnya umur tidak boleh bernilai 0 atau negatif:
 
 ```java
-if (nama.trim().isEmpty()) {
-    System.out.println("Nama pemeriksaan tidak boleh kosong.");
-    return;
+public void setUmur(int umur) {
+    if (umur > 0) {
+        this.umur = umur;
+    }
 }
 ```
-<img width="547" height="76" alt="image" src="https://github.com/user-attachments/assets/13d6c176-4555-48cc-9efd-d6538af6d296" />
 
+Dengan demikian, data pada object tetap dikontrol melalui method yang telah disediakan.
 
-Kode tersebut digunakan untuk memastikan nama pemeriksaan tidak kosong atau hanya berisi spasi.
+---
+
+## 6. Penerapan Inheritance
+
+Inheritance diterapkan pada class `Petugas`, `Analis`, dan `Dokter`.
+
+`Petugas` digunakan sebagai superclass, sedangkan `Analis` dan `Dokter` menjadi subclass.
+
+Strukturnya:
+
+```text
+          Petugas
+          /     \
+         /       \
+      Analis    Dokter
+```
+
+Class `Petugas` memiliki atribut umum:
+
+```java
+private String id;
+private String nama;
+private int umur;
+private String jenisKelamin;
+```
+
+Kemudian class `Analis` mewarisi class `Petugas` menggunakan:
+
+```java
+public class Analis extends Petugas
+```
+
+Sedangkan class `Dokter` menggunakan:
+
+```java
+public class Dokter extends Petugas
+```
+
+Selain mewarisi atribut dan method dari `Petugas`, masing-masing subclass memiliki atribut khusus.
+
+Pada `Analis` terdapat:
+
+```java
+private String spesialisasiBidang;
+```
+
+Sedangkan pada `Dokter` terdapat:
+
+```java
+private String nomorSTR;
+```
+
+---
+
+## 7. Penerapan Overriding
+
+Overriding diterapkan pada method `tampilkanInfo()` yang terdapat pada class `Petugas`.
+
+Pada class `Petugas` terdapat:
+
+```java
+public String tampilkanInfo() {
+    return "ID: " + id + " | Nama: " + nama;
+}
+```
+
+Kemudian method tersebut dioverride oleh class `Analis`:
+
+```java
+@Override
+public String tampilkanInfo() {
+    return super.tampilkanInfo()
+            + " | Peran: Analis | Spesialisasi/Bidang: "
+            + spesialisasiBidang;
+}
+```
+
+Method tersebut juga dioverride oleh class `Dokter`:
+
+```java
+@Override
+public String tampilkanInfo() {
+    return super.tampilkanInfo()
+            + " | Peran: Dokter | No. STR: "
+            + nomorSTR;
+}
+```
+
+Dengan overriding, masing-masing subclass dapat memberikan tampilan informasi yang berbeda sesuai dengan jenis petugasnya.
+
+---
+
+## 8. Penerapan Polymorphism
+
+Polymorphism diterapkan ketika object `Analis` dan `Dokter` disimpan dalam `ArrayList<Petugas>`.
+
+Contohnya:
+
+```java
+private final ArrayList<Petugas> daftarPetugas;
+```
+
+Karena `Analis` dan `Dokter` merupakan turunan dari `Petugas`, keduanya dapat dimasukkan ke dalam `ArrayList<Petugas>`.
+
+Ketika data petugas ditampilkan:
+
+```java
+for (Petugas p : daftarPetugas) {
+    view.tampilkanBaris(p.tampilkanInfo(true));
+}
+```
+
+Program akan menjalankan method `tampilkanInfo()` sesuai dengan object sebenarnya.
+
+Jika object merupakan `Analis`, informasi yang ditampilkan akan menggunakan versi `Analis`.
+
+Jika object merupakan `Dokter`, informasi yang ditampilkan akan menggunakan versi `Dokter`.
+
+Hal tersebut menunjukkan penerapan polymorphism dalam program.
+
+---
+
+## 9. Validasi Input
+
+Program menerapkan validasi input agar data yang dimasukkan pengguna sesuai dengan ketentuan.
+
+Beberapa validasi yang diterapkan antara lain:
+
+### Validasi Nama
+
+Nama tidak boleh kosong:
+
+```java
+if (nama != null && !nama.trim().isEmpty()) {
+    this.nama = nama;
+}
+```
+
+### Validasi Umur
+
+Umur harus lebih dari 0:
+
+```java
+if (umur > 0) {
+    this.umur = umur;
+}
+```
+
+### Validasi Biaya
+
+Biaya pemeriksaan tidak boleh negatif:
+
+```java
+if (biaya >= 0) {
+    this.biaya = biaya;
+}
+```
+
+### Validasi Input Teks
+
+Program juga memiliki method untuk memastikan input teks tidak kosong sehingga pengguna tidak dapat memasukkan data kosong pada bagian yang diperlukan.
+
+Validasi ini membantu mengurangi kesalahan ketika pengguna memasukkan data ke dalam program.
+
+---
+
+## 10. Dummy Data
+
+Program menyediakan dummy data yang dimasukkan ketika program pertama kali dijalankan.
+
+Dummy data digunakan agar data sudah tersedia ketika pengguna memilih menu lihat tanpa harus memasukkan data terlebih dahulu.
+
+Data awal yang disediakan mencakup:
+
+- Data pasien
+- Data analis
+- Data dokter
+- Data pemeriksaan
+- Data hasil pemeriksaan
+
+Contoh data petugas disimpan dalam:
+
+```java
+ArrayList<Petugas>
+```
+
+Sedangkan data pasien, pemeriksaan, dan hasil pemeriksaan masing-masing disimpan dalam `ArrayList` sesuai dengan class-nya.
+
+---
+
+## 11. Konsep PBO yang Diterapkan
+
+Program ini menerapkan beberapa konsep Pemrograman Berorientasi Objek, yaitu:
+
+| Konsep | Penerapan |
+|---|---|
+| Class & Object | Digunakan pada `Pasien`, `Petugas`, `Analis`, `Dokter`, `Pemeriksaan`, dan `HasilPemeriksaan` |
+| Constructor | Digunakan untuk membuat object dan mengisi data awal |
+| Access Modifier | Atribut menggunakan `private` dan method menggunakan `public` |
+| Encapsulation | Data diakses melalui getter dan setter |
+| Inheritance | `Analis` dan `Dokter` mewarisi `Petugas` |
+| Overriding | `tampilkanInfo()` dioverride pada `Analis` dan `Dokter` |
+| Polymorphism | `Analis` dan `Dokter` disimpan dalam `ArrayList<Petugas>` |
+| ArrayList | Digunakan untuk menyimpan data selama program berjalan |
+| Validasi | Digunakan untuk memeriksa input pengguna |
+| MVC | Program dibagi menjadi bagian Main, Controller, Model, dan View |
+
+---
+
+## 12. Kesimpulan
+
+Program Sistem Manajemen Laboratorium Kesehatan merupakan pengembangan dari Mini Project 1 yang menambahkan penerapan konsep Pemrograman Berorientasi Objek.
+
+Program tidak hanya mengelola data pemeriksaan, tetapi juga menghubungkan data pasien, petugas, pemeriksaan, dan hasil pemeriksaan dalam satu alur.
+
+Penerapan encapsulation, inheritance, overriding, polymorphism, validasi input, `ArrayList`, serta struktur MVC membuat program menjadi lebih terstruktur dan sesuai dengan konsep PBO yang dipelajari.
