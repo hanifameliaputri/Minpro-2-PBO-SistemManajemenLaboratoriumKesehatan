@@ -137,14 +137,7 @@ Seluruh atribut pada package `model` berstatus `private`:
 | `Pemeriksaan` | `idPemeriksaan`, `namaPemeriksaan`, `biaya` |
 | `HasilPemeriksaan` | `idHasil`, `idPasien`, `idPemeriksaan`, `idPetugas`, `hasil`, `status` |
 
-```java
-// Pasien.java
-private String id;
-private String nama;
-private int umur;
-private String jenisKelamin;
-private String keluhan;
-```
+
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/abf510b6-16aa-44ea-ba62-d0f15ee1a935" />
 
 
@@ -152,20 +145,6 @@ Atribut tersebut tidak dapat diakses langsung dari luar class (misalnya dari Con
 
 **2. Getter dan setter bersifat `public`**
 
-```java
-// Pasien.java
-public String getNama() {
-    return nama;
-}
-
-public void setNama(String nama) {
-    if (nama != null && !nama.trim().isEmpty()) {
-        this.nama = nama;
-    } else {
-        System.out.println(">> ERROR: Nama tidak boleh kosong!");
-    }
-}
-```
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/39fc70a5-ef99-41bb-ad16-69195176263d" />
 
@@ -180,16 +159,6 @@ Setter tidak hanya mengisi nilai, tetapi juga menyaring data sehingga object sel
 | `setUmur()` | Harus lebih dari 0 |
 | `setBiaya()` | Tidak boleh negatif |
 
-```java
-// Pemeriksaan.java
-public void setBiaya(double biaya) {
-    if (biaya >= 0) {
-        this.biaya = biaya;
-    } else {
-        System.out.println(">> ERROR: Biaya tidak boleh negatif!");
-    }
-}
-```
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/28c6e143-284d-4e99-8d5b-f7bde0d036bf" />
 
@@ -198,16 +167,6 @@ public void setBiaya(double biaya) {
 
 Agar validasi juga berlaku saat object dibuat, konstruktor memanggil setter, bukan mengisi atribut secara langsung:
 
-```java
-// Pasien.java
-public Pasien(String id, String nama, int umur, String jenisKelamin, String keluhan) {
-    this.id = id;
-    setNama(nama);
-    setUmur(umur);
-    setJenisKelamin(jenisKelamin);
-    setKeluhan(keluhan);
-}
-```
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/45ccf3cc-1254-4052-a3a0-c9070cebdd71" />
 
@@ -253,11 +212,10 @@ Inheritance diterapkan pada **1 superclass** (`Petugas`) dan **2 subclass** (`An
 
 Pewarisan dituliskan dengan keyword `extends`:
 
-```java
-public class Analis extends Petugas { ... }
-public class Dokter extends Petugas { ... }
-```
+
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/03720126-602d-48f5-954f-f791ca6e409f" />
+
+dan
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/bfb0f14c-cdca-4c02-bd08-92148dc6002a" />
 
@@ -265,15 +223,10 @@ public class Dokter extends Petugas { ... }
 
 Konstruktor subclass memanggil konstruktor superclass dengan `super(...)`, lalu mengisi atribut miliknya sendiri lewat setter:
 
-```java
-// Analis.java
-public Analis(String id, String nama, int umur, String jenisKelamin, String spesialisasiBidang) {
-    super(id, nama, umur, jenisKelamin);      // mengisi atribut milik Petugas
-    setSpesialisasiBidang(spesialisasiBidang); // mengisi atribut milik Analis
-}
-```
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/a9bf28e9-324a-452c-a3ee-a40d7d700bb3" />
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/a03aa779-3f7e-4204-81e5-53bf3126b198" />
+
 
 
 **Manfaat pewarisan pada program ini:**
@@ -302,62 +255,22 @@ public Analis(String id, String nama, int umur, String jenisKelamin, String spes
 
 Method yang di-override berada di `model/Petugas.java`:
 
-```java
-// Petugas.java (superclass)
-public String tampilkanInfo() {
-    return "ID: " + id + " | Nama: " + nama;
-}
 
-public String tampilkanInfo(boolean detail) {
-    if (!detail) {
-        return tampilkanInfo();
-    }
-    return "ID: " + id + " | Nama: " + nama
-            + " | Umur: " + umur + " | Jenis Kelamin: " + jenisKelamin;
-}
-```
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/027cdda3-9cf6-4a1c-b5d4-998fa2cb17d1" />
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/0909ad61-27c7-4451-9c2b-b08b3eb8ae3f" />
+
 
 
 Versi di subclass `Analis`:
 
-```java
-// Analis.java
-@Override
-public String tampilkanInfo() {
-    return super.tampilkanInfo() + " | Peran: Analis | Spesialisasi/Bidang: " + spesialisasiBidang;
-}
 
-@Override
-public String tampilkanInfo(boolean detail) {
-    if (!detail) {
-        return tampilkanInfo();
-    }
-    return super.tampilkanInfo(true) + " | Peran: Analis | Spesialisasi/Bidang: " + spesialisasiBidang;
-}
-```
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/2c564272-3fd7-45d7-ad83-8d3c5b102f11" />
 
 
 Versi di subclass `Dokter`:
 
-```java
-// Dokter.java
-@Override
-public String tampilkanInfo() {
-    return super.tampilkanInfo() + " | Peran: Dokter | No. STR: " + nomorSTR;
-}
 
-@Override
-public String tampilkanInfo(boolean detail) {
-    if (!detail) {
-        return tampilkanInfo();
-    }
-    return super.tampilkanInfo(true) + " | Peran: Dokter | No. STR: " + nomorSTR;
-}
-```
 
 <img  height="200" alt="image" src="https://github.com/user-attachments/assets/7fa10d70-ea65-4840-a56c-c1950d970415" />
 
@@ -390,12 +303,10 @@ Langkah kerjanya:
 
 Contoh output program:
 
-```text
-ID: PT1 | Nama: Asti Putri | Umur: 29 | Jenis Kelamin: Laki-Laki | Peran: Analis | Spesialisasi/Bidang: Hematologi
-------------------------------------
-ID: PT2 | Nama: dr. Hanif Amelia Putri | Umur: 25 | Jenis Kelamin: Perempuan | Peran: Dokter | No. STR: STR-123456789
-------------------------------------
-```
+
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/8047bdb4-73d2-463c-b700-ba107440f0b6" />
+
 
 **Peran `super`:** Setiap subclass memakai `super.tampilkanInfo(...)` agar tidak menulis ulang bagian yang sudah ada di `Petugas`. Subclass hanya menambahkan informasi khususnya.
 
@@ -438,7 +349,7 @@ LaboratoriumKesehatan/src/main/java/
     '-- LaboratoriumView.java         (menu, judul, pesan, dan konfirmasi pendaftaran)
 ```
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/df901a28-d166-452e-a1f6-5fcad20a0fed" />
+<img height="400" alt="image" src="https://github.com/user-attachments/assets/df901a28-d166-452e-a1f6-5fcad20a0fed" />
 
 
 | Package | Peran |
@@ -549,6 +460,7 @@ Penjelasan alur pada gambar di atas:
 ### Menu 2 - Kelola Pasien
 
 Menu 2
+
 <img height="205" alt="image" src="https://github.com/user-attachments/assets/8bf91a83-2c9f-47aa-8841-f9337e5d3e0c" />
 
 Tambah pasien.
@@ -649,7 +561,19 @@ Lihat riwayat hasil per pasien.
 
 Contoh ketika pengguna memasukkan input yang salah (misalnya huruf pada kolom umur, atau jenis kelamin yang tidak valid). Program meminta input diulang dan tidak berhenti.
 
-![Validasi Input](screenshots/19-validasi-input.png)
+contoh pada umur:
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/2b3287a8-a402-4cb8-81f9-6f301150e1fa" />
+
+contoh pada jenis kelamin:
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/f0d20258-6276-439c-baf2-865dc61df61d" />
+
+contoh pada nama:
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/52eea062-1202-49e4-af27-3ba4c36a9144" />
+
+
 
 ### Menu 6 - Keluar
 
