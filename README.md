@@ -444,7 +444,7 @@ Tampilan **konfirmasi pendaftaran** setelah semua data dipilih.
 
 Pendaftaran dengan **pasien yang sudah terdaftar** dan tampilan konfirmasi pendaftaran.
 
-<img height="500" alt="image" src="https://github.com/user-attachments/assets/f9554086-2e57-4a52-80f7-2771cd47b236" />
+<img height="600" alt="image" src="https://github.com/user-attachments/assets/f9554086-2e57-4a52-80f7-2771cd47b236" />
 
 
 Penjelasan alur pada gambar di atas:
@@ -459,117 +459,117 @@ Penjelasan alur pada gambar di atas:
 
 ### Menu 2 - Kelola Pasien
 
-Menu 2
+**Menu 2**
 
 <img height="205" alt="image" src="https://github.com/user-attachments/assets/8bf91a83-2c9f-47aa-8841-f9337e5d3e0c" />
 
-Tambah pasien.
+**Tambah pasien.**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/9456b43d-2908-4bd4-9cf2-805b9c8e4f2a" />
 
 
-Lihat semua pasien.
+**Lihat semua pasien.**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/e69c3b35-7371-4439-b58e-ac83c7d6180a" />
 
 
 
-Cari pasien berdasarkan ID.
+**Cari pasien berdasarkan ID.**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/a63b2cdb-bf74-4d28-b62b-39b92a2b11d3" />
 
 
-Hapus pasien.
+**Hapus pasien.**
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/8b07226f-a16f-4626-b5b1-056b92ec2431" />
+<img height="300" alt="image" src="https://github.com/user-attachments/assets/8b07226f-a16f-4626-b5b1-056b92ec2431" />
 
 
 ### Menu 3 - Kelola Petugas
 
-Menu Petugas
+**Menu Petugas**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/f894cbeb-39ae-4cf6-965c-41068a27e47f" />
 
 
-Tambah analis.
+**Tambah analis.**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/6e467abc-22a5-450a-a7ad-5cd4de95b1d5" />
 
 
-Tambah dokter.
+**Tambah dokter.**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/9ef3e20d-ba4c-493a-9c07-bc76a0bc945b" />
 
 
-Lihat semua petugas. Pada tampilan ini terlihat hasil **overriding**: `Analis` menampilkan spesialisasi, sedangkan `Dokter` menampilkan nomor STR.
+**Lihat semua petugas.** Pada tampilan ini terlihat hasil **overriding**: `Analis` menampilkan spesialisasi, sedangkan `Dokter` menampilkan nomor STR.
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/2541d238-741b-4295-adb2-553c22211133" />
 
 
 ### Menu 4 - Kelola Pemeriksaan
 
-Menu Pemeriksaan
+**Menu Pemeriksaan**
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/1d988ff6-93f9-4cdd-b66e-975602c74b5f" />
-
-
-Tambah pemeriksaan.
-
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/a96b2a2e-fc24-435e-bc07-5c3fa097019d" />
+<img height="300" alt="image" src="https://github.com/user-attachments/assets/1d988ff6-93f9-4cdd-b66e-975602c74b5f" />
 
 
-Lihat semua pemeriksaan.
+**Tambah pemeriksaan.**
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/4df5db88-4ea8-4e59-b67d-69aafd375d37" />
-
-
-Cari pemeriksaan.
-
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/eecdf32a-d036-4861-ac4a-fc36a4e3faff" />
+<img height="300" alt="image" src="https://github.com/user-attachments/assets/a96b2a2e-fc24-435e-bc07-5c3fa097019d" />
 
 
-Ubah pemeriksaan.
+**Lihat semua pemeriksaan.**
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/62de538f-b1dd-4389-8f37-c4f3fa8423d4" />
+<img height="300" alt="image" src="https://github.com/user-attachments/assets/4df5db88-4ea8-4e59-b67d-69aafd375d37" />
 
-Hapus pemeriksaan.
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/2a21e46a-a9bf-4de2-a2f9-ee1684ea5011" />
+**Cari pemeriksaan.**
+
+<img height="300" alt="image" src="https://github.com/user-attachments/assets/eecdf32a-d036-4861-ac4a-fc36a4e3faff" />
+
+
+**Ubah pemeriksaan.**
+
+<img height="400" alt="image" src="https://github.com/user-attachments/assets/62de538f-b1dd-4389-8f37-c4f3fa8423d4" />
+
+**Hapus pemeriksaan.**
+
+<img height="400" alt="image" src="https://github.com/user-attachments/assets/2a21e46a-a9bf-4de2-a2f9-ee1684ea5011" />
 
 ### Menu 5 - Kelola Hasil Pemeriksaan
 
-Menu Hasil Pemerikasaan
+**Menu Hasil Pemerikasaan**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/71dece68-9187-43c3-b493-39cf59267399" />
 
-Input hasil pemeriksaan.
+**Input hasil pemeriksaan.**
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/c1702f36-0e91-4faf-899a-e27454e18335" />
-
-
-Lihat semua hasil.
-
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/2ec5fbac-5815-4fa6-a40a-1c1406d6c424" />
+<img height="300" alt="image" src="https://github.com/user-attachments/assets/c1702f36-0e91-4faf-899a-e27454e18335" />
 
 
-Lihat riwayat hasil per pasien.
+**Lihat semua hasil.**
 
-<img height="200" alt="image" src="https://github.com/user-attachments/assets/cae10999-f5d9-4f28-91bd-71c9ccc1051f" />
+<img height="400" alt="image" src="https://github.com/user-attachments/assets/2ec5fbac-5815-4fa6-a40a-1c1406d6c424" />
+
+
+**Lihat riwayat hasil per pasien.**
+
+<img height="400" alt="image" src="https://github.com/user-attachments/assets/cae10999-f5d9-4f28-91bd-71c9ccc1051f" />
 
 
 ### Validasi Input
 
 Contoh ketika pengguna memasukkan input yang salah (misalnya huruf pada kolom umur, atau jenis kelamin yang tidak valid). Program meminta input diulang dan tidak berhenti.
 
-contoh pada umur:
+**contoh pada umur:**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/2b3287a8-a402-4cb8-81f9-6f301150e1fa" />
 
-contoh pada jenis kelamin:
+**contoh pada jenis kelamin:**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/f0d20258-6276-439c-baf2-865dc61df61d" />
 
-contoh pada nama:
+**contoh pada nama:**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/52eea062-1202-49e4-af27-3ba4c36a9144" />
 
@@ -577,7 +577,7 @@ contoh pada nama:
 
 ### Menu 6 - Keluar
 
-Program menampilkan pesan penutup dan berhenti.
+**Program menampilkan pesan penutup dan berhenti.**
 
 <img height="200" alt="image" src="https://github.com/user-attachments/assets/4cd9ff28-b650-4b05-82ce-36129abfd574" />
 
