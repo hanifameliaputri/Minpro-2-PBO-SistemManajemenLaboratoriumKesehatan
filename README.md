@@ -579,7 +579,8 @@ contoh pada nama:
 
 Program menampilkan pesan penutup dan berhenti.
 
-![Keluar Program](screenshots/20-keluar.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/4cd9ff28-b650-4b05-82ce-36129abfd574" />
+
 
 ---
 
