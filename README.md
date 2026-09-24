@@ -145,6 +145,8 @@ private int umur;
 private String jenisKelamin;
 private String keluhan;
 ```
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/abf510b6-16aa-44ea-ba62-d0f15ee1a935" />
+
 
 Atribut tersebut tidak dapat diakses langsung dari luar class (misalnya dari Controller atau View). Controller dan View harus memakai getter, contohnya `pasien.getNama()` atau `pemeriksaan.getBiaya()`.
 
@@ -164,6 +166,9 @@ public void setNama(String nama) {
     }
 }
 ```
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/39fc70a5-ef99-41bb-ad16-69195176263d" />
+
 
 **3. Setter berfungsi sebagai validasi**
 
@@ -186,6 +191,9 @@ public void setBiaya(double biaya) {
 }
 ```
 
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/28c6e143-284d-4e99-8d5b-f7bde0d036bf" />
+
+
 **4. Konstruktor memakai setter**
 
 Agar validasi juga berlaku saat object dibuat, konstruktor memanggil setter, bukan mengisi atribut secara langsung:
@@ -200,6 +208,11 @@ public Pasien(String id, String nama, int umur, String jenisKelamin, String kelu
     setKeluhan(keluhan);
 }
 ```
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/45ccf3cc-1254-4052-a3a0-c9070cebdd71" />
+
+
+
 
 **5. Encapsulation pada Controller dan class `final`**
 
@@ -244,6 +257,11 @@ Pewarisan dituliskan dengan keyword `extends`:
 public class Analis extends Petugas { ... }
 public class Dokter extends Petugas { ... }
 ```
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/03720126-602d-48f5-954f-f791ca6e409f" />
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/bfb0f14c-cdca-4c02-bd08-92148dc6002a" />
+
+
 
 Konstruktor subclass memanggil konstruktor superclass dengan `super(...)`, lalu mengisi atribut miliknya sendiri lewat setter:
 
@@ -254,6 +272,9 @@ public Analis(String id, String nama, int umur, String jenisKelamin, String spes
     setSpesialisasiBidang(spesialisasiBidang); // mengisi atribut milik Analis
 }
 ```
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/a9bf28e9-324a-452c-a3ee-a40d7d700bb3" />
+
 
 **Manfaat pewarisan pada program ini:**
 
@@ -296,6 +317,9 @@ public String tampilkanInfo(boolean detail) {
 }
 ```
 
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/027cdda3-9cf6-4a1c-b5d4-998fa2cb17d1" />
+
+
 Versi di subclass `Analis`:
 
 ```java
@@ -313,6 +337,9 @@ public String tampilkanInfo(boolean detail) {
     return super.tampilkanInfo(true) + " | Peran: Analis | Spesialisasi/Bidang: " + spesialisasiBidang;
 }
 ```
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/2c564272-3fd7-45d7-ad83-8d3c5b102f11" />
+
 
 Versi di subclass `Dokter`:
 
@@ -332,6 +359,9 @@ public String tampilkanInfo(boolean detail) {
 }
 ```
 
+<img  height="200" alt="image" src="https://github.com/user-attachments/assets/7fa10d70-ea65-4840-a56c-c1950d970415" />
+
+
 ### Cara Kerja Overriding
 
 Overriding dipakai ketika pengguna membuka **Kelola Petugas -> Lihat Semua Petugas** (juga saat memilih petugas pada menu Pendaftaran Pemeriksaan). Kedua fitur tersebut memanggil `tampilkanSemuaPetugas()` di `LaboratoriumController`:
@@ -347,6 +377,8 @@ public void tampilkanSemuaPetugas() {
     }
 }
 ```
+
+
 
 Langkah kerjanya:
 
@@ -405,6 +437,9 @@ LaboratoriumKesehatan/src/main/java/
 '-- view/                             <- [VIEW]
     '-- LaboratoriumView.java         (menu, judul, pesan, dan konfirmasi pendaftaran)
 ```
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/df901a28-d166-452e-a1f6-5fcad20a0fed" />
+
 
 | Package | Peran |
 |---|---|
@@ -466,7 +501,7 @@ Saat program pertama kali dijalankan, `isiDataAwal()` mengisi data berikut agar 
 
 ---
 
-## 6. Hasil Output Program (Screenshot)
+## 6. Hasil Output Program 
 
 Berikut tampilan program saat dijalankan, berurutan dari menu utama sampai keluar.
 
@@ -474,85 +509,141 @@ Berikut tampilan program saat dijalankan, berurutan dari menu utama sampai kelua
 
 Tampilan pertama saat program dijalankan.
 
-![Menu Utama](screenshots/01-menu-utama.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/e08d72bc-32c8-4a46-bfd7-ce88df167df1" />
+
 
 ### Menu 1 - Pendaftaran Pemeriksaan
 
 Pendaftaran dengan **pasien baru**: pengguna mengisi data pasien, lalu memilih pemeriksaan dan petugas.
 
-![Pendaftaran Pasien Baru](screenshots/02-pendaftaran-pasien-baru.png)
+<img height="500" alt="image" src="https://github.com/user-attachments/assets/d0c6835f-c0f3-4ae4-9a47-479a10919cc6" />
+
+Penjelasan alur pada gambar di atas:
+
+1. Pengguna memilih menu **1. Pendaftaran Pemeriksaan**, lalu memilih **1. Pasien Baru**.
+2. Program meminta data pasien: nama, umur, jenis kelamin, dan keluhan. Setiap input divalidasi, misalnya jenis kelamin hanya menerima `Laki-laki` atau `Perempuan` (huruf besar/kecil tidak dibedakan).
+3. Setelah data valid, pasien disimpan dan mendapat **ID otomatis** (`P2`, karena `P1` sudah dipakai dummy data).
+4. Program menampilkan daftar pemeriksaan beserta biayanya, lalu pengguna memasukkan ID pemeriksaan (`PM1`).
+5. Program menampilkan daftar petugas, lalu pengguna memasukkan ID petugas (`PT2`). Tampilan daftar ini memperlihatkan hasil **overriding**: `Analis` menampilkan spesialisasi, sedangkan `Dokter` menampilkan nomor STR.
+
+Tampilan **konfirmasi pendaftaran** setelah semua data dipilih.
+
+<img height="215" alt="image" src="https://github.com/user-attachments/assets/6221e7de-250e-428c-8675-93c7998378e2" />
+
 
 Pendaftaran dengan **pasien yang sudah terdaftar** dan tampilan konfirmasi pendaftaran.
 
-![Pendaftaran Pasien Terdaftar dan Konfirmasi](screenshots/03-pendaftaran-konfirmasi.png)
+<img height="500" alt="image" src="https://github.com/user-attachments/assets/f9554086-2e57-4a52-80f7-2771cd47b236" />
+
+
+Penjelasan alur pada gambar di atas:
+
+1. Pengguna memilih **2. Pasien Sudah Terdaftar**, lalu program menampilkan semua pasien (`P1` dan `P2`). Pasien `P2` adalah pasien yang sebelumnya didaftarkan sebagai pasien baru, sehingga terlihat bahwa data tersimpan di `ArrayList`.
+2. Pengguna memasukkan ID pasien (`p1`). Pencarian tidak membedakan huruf besar dan kecil (`equalsIgnoreCase`), sehingga `p1` tetap ditemukan sebagai `P1`.
+3. Pengguna memilih pemeriksaan (`PM1`) dan petugas (`PT1`). Daftar petugas menampilkan hasil **overriding**: `Analis` menampilkan spesialisasi, sedangkan `Dokter` menampilkan nomor STR.
+4. Program menampilkan **konfirmasi pendaftaran** berisi ID dan nama pasien, jenis pemeriksaan, biaya, petugas, serta status `Terdaftar`.
+5. Data pendaftaran disimpan pada `pasienTerdaftar`, `pemeriksaanTerdaftar`, dan `petugasTerdaftar` untuk dipakai pada menu **Input Hasil Pemeriksaan**.
+
+
 
 ### Menu 2 - Kelola Pasien
 
+Menu 2
+<img height="205" alt="image" src="https://github.com/user-attachments/assets/8bf91a83-2c9f-47aa-8841-f9337e5d3e0c" />
+
 Tambah pasien.
 
-![Tambah Pasien](screenshots/04-tambah-pasien.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/9456b43d-2908-4bd4-9cf2-805b9c8e4f2a" />
+
 
 Lihat semua pasien.
 
-![Lihat Semua Pasien](screenshots/05-lihat-pasien.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/e69c3b35-7371-4439-b58e-ac83c7d6180a" />
+
+
 
 Cari pasien berdasarkan ID.
 
-![Cari Pasien](screenshots/06-cari-pasien.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/a63b2cdb-bf74-4d28-b62b-39b92a2b11d3" />
+
 
 Hapus pasien.
 
-![Hapus Pasien](screenshots/07-hapus-pasien.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/8b07226f-a16f-4626-b5b1-056b92ec2431" />
+
 
 ### Menu 3 - Kelola Petugas
 
+Menu Petugas
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/f894cbeb-39ae-4cf6-965c-41068a27e47f" />
+
+
 Tambah analis.
 
-![Tambah Analis](screenshots/08-tambah-analis.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/6e467abc-22a5-450a-a7ad-5cd4de95b1d5" />
+
 
 Tambah dokter.
 
-![Tambah Dokter](screenshots/09-tambah-dokter.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/9ef3e20d-ba4c-493a-9c07-bc76a0bc945b" />
+
 
 Lihat semua petugas. Pada tampilan ini terlihat hasil **overriding**: `Analis` menampilkan spesialisasi, sedangkan `Dokter` menampilkan nomor STR.
 
-![Lihat Semua Petugas](screenshots/10-lihat-petugas.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/2541d238-741b-4295-adb2-553c22211133" />
+
 
 ### Menu 4 - Kelola Pemeriksaan
 
+Menu Pemeriksaan
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/1d988ff6-93f9-4cdd-b66e-975602c74b5f" />
+
+
 Tambah pemeriksaan.
 
-![Tambah Pemeriksaan](screenshots/11-tambah-pemeriksaan.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/a96b2a2e-fc24-435e-bc07-5c3fa097019d" />
+
 
 Lihat semua pemeriksaan.
 
-![Lihat Semua Pemeriksaan](screenshots/12-lihat-pemeriksaan.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/4df5db88-4ea8-4e59-b67d-69aafd375d37" />
+
 
 Cari pemeriksaan.
 
-![Cari Pemeriksaan](screenshots/13-cari-pemeriksaan.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/eecdf32a-d036-4861-ac4a-fc36a4e3faff" />
+
 
 Ubah pemeriksaan.
 
-![Ubah Pemeriksaan](screenshots/14-ubah-pemeriksaan.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/62de538f-b1dd-4389-8f37-c4f3fa8423d4" />
 
 Hapus pemeriksaan.
 
-![Hapus Pemeriksaan](screenshots/15-hapus-pemeriksaan.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/2a21e46a-a9bf-4de2-a2f9-ee1684ea5011" />
 
 ### Menu 5 - Kelola Hasil Pemeriksaan
 
+Menu Hasil Pemerikasaan
+
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/71dece68-9187-43c3-b493-39cf59267399" />
+
 Input hasil pemeriksaan.
 
-![Input Hasil Pemeriksaan](screenshots/16-input-hasil.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/c1702f36-0e91-4faf-899a-e27454e18335" />
+
 
 Lihat semua hasil.
 
-![Lihat Semua Hasil](screenshots/17-lihat-hasil.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/2ec5fbac-5815-4fa6-a40a-1c1406d6c424" />
+
 
 Lihat riwayat hasil per pasien.
 
-![Riwayat Hasil per Pasien](screenshots/18-riwayat-hasil.png)
+<img height="200" alt="image" src="https://github.com/user-attachments/assets/cae10999-f5d9-4f28-91bd-71c9ccc1051f" />
+
 
 ### Validasi Input
 
