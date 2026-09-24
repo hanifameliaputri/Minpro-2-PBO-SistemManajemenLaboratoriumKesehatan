@@ -4,167 +4,141 @@
 **Kelas:** B  
 **NIM:** 2509116075  
 
-## 1. Deskripsi Program
-
-Sistem Manajemen Laboratorium Kesehatan adalah program berbasis Java yang digunakan untuk mengelola data pasien, petugas laboratorium, jenis pemeriksaan, dan hasil pemeriksaan.
-
-Program ini merupakan pengembangan dari Mini Project 1 dengan menerapkan beberapa konsep Pemrograman Berorientasi Objek (PBO), seperti **encapsulation, inheritance, overriding, polymorphism, constructor, access modifier, getter dan setter**, serta validasi input.
-
-Program juga menggunakan `ArrayList` untuk menyimpan data selama program berjalan dan menyediakan dummy data agar pengguna dapat langsung melihat data ketika program dijalankan.
 
 ---
 
-## 2. Fitur Program
 
-Program memiliki beberapa fitur utama, yaitu:
+## 1. Deskripsi Singkat Program
 
-- Pendaftaran pemeriksaan
-- Mengelola data pasien
-- Mengelola data petugas
-- Mengelola data pemeriksaan
-- Mengelola hasil pemeriksaan
-- Menambah, melihat, mencari, mengubah, dan menghapus data tertentu
-- Validasi input pengguna
-- Menampilkan riwayat hasil pemeriksaan berdasarkan pasien
-- Menggunakan dummy data pada saat program pertama kali dijalankan
+Program **Sistem Manajemen Laboratorium Kesehatan** merupakan program berbasis Java yang digunakan untuk mengelola data pasien, petugas laboratorium, pemeriksaan, dan hasil pemeriksaan. Program menyediakan beberapa menu utama, yaitu pendaftaran pemeriksaan, pengelolaan pasien, pengelolaan petugas, pengelolaan pemeriksaan, serta pengelolaan hasil pemeriksaan.
+
+
+Fitur utama aplikasi:
+
+- **Pendaftaran Pemeriksaan**: mendaftarkan pasien (baru atau yang sudah terdaftar) ke suatu jenis pemeriksaan yang ditangani oleh petugas tertentu.
+- **Kelola Pasien**: tambah, lihat semua, cari, dan hapus data pasien.
+- **Kelola Petugas**: tambah **Analis** atau **Dokter** dan lihat semua petugas.
+- **Kelola Pemeriksaan**: tambah, lihat semua, cari, ubah, dan hapus jenis pemeriksaan beserta biayanya.
+- **Kelola Hasil Pemeriksaan**: input hasil pemeriksaan, lihat semua hasil, dan lihat riwayat hasil per pasien.
+- **Validasi input** agar program tidak berhenti akibat kesalahan pengetikan pengguna.
+- **Dummy data** awal sehingga data langsung tersedia saat program pertama kali dijalankan.
+
+Seluruh data disimpan sementara selama program berjalan menggunakan `ArrayList`.
 
 ---
 
-## 3. Alur Program
+## 2. Penjelasan Alur Program
 
-Program dijalankan melalui class `Main.java`. Class tersebut memanggil `LaboratoriumController` untuk menjalankan program.
-
-Alur utama program:
+### Alur Umum
 
 ```text
-Main
-  ↓
-LaboratoriumController
-  ↓
-Menu Utama
-  ├── 1. Pendaftaran Pemeriksaan
-  ├── 2. Kelola Pasien
-  ├── 3. Kelola Petugas
-  ├── 4. Kelola Pemeriksaan
-  ├── 5. Kelola Hasil Pemeriksaan
-  └── 6. Keluar
+[Start] Main.main()
+        |
+        v
+new LaboratoriumController()
+  |-- membuat 4 ArrayList (Pasien, Petugas, Pemeriksaan, HasilPemeriksaan)
+  |-- mengatur counter ID awal (nextId... = 1)
+  |-- membuat objek LaboratoriumView
+  '-- isiDataAwal()  -> mengisi dummy data
+        |
+        v
+controller.jalankanProgram()
+        |
+        v
++------------------------------------+
+|     TAMPIL MENU UTAMA (while)      | <--------------------+
++------------------------------------+                      |
+| 1. Pendaftaran Pemeriksaan         |                      |
+| 2. Kelola Pasien                   |                      |
+| 3. Kelola Petugas                  |                      |
+| 4. Kelola Pemeriksaan              |                      |
+| 5. Kelola Hasil Pemeriksaan        |                      |
+| 6. Keluar                          |                      |
++------------------------------------+                      |
+        |                                                   |
+        |--- Pilih 1-5 -> Proses menu terkait --------------+
+        |
+        '--- Pilih 6   -> "Program selesai" -> [Program Berhenti]
 ```
 
-### 1. Pendaftaran Pemeriksaan
+1. **Program dimulai dari `Main.java`.** Method `main()` membuat objek `LaboratoriumController` lalu memanggil `jalankanProgram()`.
+2. **Konstruktor Controller** menyiapkan empat `ArrayList`, counter ID otomatis, objek `LaboratoriumView`, lalu memanggil `isiDataAwal()` untuk memasukkan dummy data.
+3. **`jalankanProgram()`** membuka `Scanner` dan menjalankan perulangan `while` yang terus menampilkan menu utama sampai pengguna memilih menu 6. Input menu dibaca dengan `bacaInt()` sehingga huruf atau input kosong tidak membuat program error. Pilihan di luar 1-6 menampilkan pesan `Pilihan tidak tersedia.`
+4. **Setiap sub-menu** (menu 2 sampai 5) memiliki perulangan sendiri dan baru kembali ke menu utama ketika pengguna memilih opsi *Kembali*.
 
-Pada menu ini pengguna dapat melakukan pendaftaran pemeriksaan.
+### Alur Tiap Menu
 
-Pengguna dapat memilih:
-
-- Pasien baru
-- Pasien yang sudah terdaftar
-
-Setelah pasien dipilih, pengguna memilih jenis pemeriksaan dan petugas yang menangani pemeriksaan.
-
-Setelah semua data dipilih, sistem menampilkan konfirmasi pendaftaran.
-
-### 2. Kelola Pasien
-
-Menu ini digunakan untuk mengelola data pasien.
-
-Fitur yang tersedia:
-
-- Tambah pasien
-- Lihat semua pasien
-- Cari pasien
-- Hapus pasien
-
-### 3. Kelola Petugas
-
-Menu ini digunakan untuk mengelola data petugas laboratorium.
-
-Pengguna dapat menambahkan:
-
-- Analis
-- Dokter
-
-Data kedua jenis petugas tersebut disimpan dalam satu `ArrayList<Petugas>`.
-
-### 4. Kelola Pemeriksaan
-
-Menu ini digunakan untuk mengelola jenis pemeriksaan laboratorium.
-
-Fitur yang tersedia:
-
-- Tambah pemeriksaan
-- Lihat semua pemeriksaan
-- Cari pemeriksaan
-- Ubah pemeriksaan
-- Hapus pemeriksaan
-
-### 5. Kelola Hasil Pemeriksaan
-
-Menu ini digunakan untuk mencatat dan melihat hasil pemeriksaan pasien.
-
-Fitur yang tersedia:
-
-- Input hasil pemeriksaan
-- Lihat semua hasil
-- Lihat riwayat hasil berdasarkan pasien
-
-### 6. Keluar
-
-Menu ini digunakan untuk menghentikan program.
-
----
-
-## 4. Struktur Program
-
-Program menggunakan pembagian package untuk memisahkan bagian-bagian program.
+**Menu 1 - Pendaftaran Pemeriksaan**
 
 ```text
-LaboratoriumKesehatan
-│
-├── Main
-│   └── Main.java
-│
-├── controller
-│   └── LaboratoriumController.java
-│
-├── model
-│   ├── Pasien.java
-│   ├── Petugas.java
-│   ├── Analis.java
-│   ├── Dokter.java
-│   ├── Pemeriksaan.java
-│   └── HasilPemeriksaan.java
-│
-└── view
-    └── LaboratoriumView.java
+Pilih pasien
+  |-- 1. Pasien Baru       -> input nama, umur, jenis kelamin, keluhan -> tambahPasien() (ID otomatis: P1, P2, ...)
+  '-- 2. Pasien Terdaftar  -> tampil semua pasien -> input ID Pasien
+                              '-- tidak ditemukan -> pesan error -> kembali ke menu utama
+        |
+        v
+Tampil daftar pemeriksaan -> input ID Pemeriksaan
+  '-- tidak ditemukan -> pesan error -> kembali ke menu utama
+        |
+        v
+Tampil daftar petugas -> input ID Petugas
+  '-- tidak ditemukan -> pesan error -> kembali ke menu utama
+        |
+        v
+Tampil KONFIRMASI PENDAFTARAN (ID/nama pasien, pemeriksaan, biaya, petugas, status)
+        |
+        v
+Simpan ke pasienTerdaftar, pemeriksaanTerdaftar, petugasTerdaftar
 ```
 
-### Fungsi setiap package
+Data pendaftaran terakhir disimpan pada tiga atribut Controller (`pasienTerdaftar`, `pemeriksaanTerdaftar`, `petugasTerdaftar`) dan dipakai kembali oleh menu 5 saat menginput hasil.
 
-**Main**
+**Menu 2 - Kelola Pasien**: tambah pasien, lihat semua pasien, cari pasien berdasarkan ID (ditampilkan lengkap dengan umur, jenis kelamin, dan keluhan), dan hapus pasien.
 
-Digunakan sebagai titik awal program. `Main.java` membuat objek `LaboratoriumController` dan menjalankan program.
+**Menu 3 - Kelola Petugas**: tambah Analis, tambah Dokter, dan lihat semua petugas. Objek `Analis` dan `Dokter` disimpan dalam satu `ArrayList<Petugas>`.
 
-**Controller**
+**Menu 4 - Kelola Pemeriksaan**: tambah, lihat semua, cari, ubah (nama dan biaya), dan hapus pemeriksaan.
 
-`LaboratoriumController` mengatur proses program, seperti input data, pengelolaan `ArrayList`, pencarian, penambahan, perubahan, penghapusan, serta proses pendaftaran pemeriksaan.
+**Menu 5 - Kelola Hasil Pemeriksaan**
 
-**Model**
+```text
+1. Input Hasil
+     |-- Belum pernah melakukan pendaftaran (menu 1)?
+     |     -> tampil pesan "Silakan lakukan menu 1. Pendaftaran Pemeriksaan terlebih dahulu"
+     '-- Sudah -> tampil semua pasien -> input ID Pasien -> input hasil -> input status (Normal / Tidak Normal)
+           -> tambahHasil() memeriksa ID pasien, pemeriksaan, dan petugas
+           -> jika valid, hasil disimpan dengan ID otomatis (H1, H2, ...)
+2. Lihat Semua Hasil
+3. Lihat Riwayat Hasil per Pasien (input ID Pasien)
+```
 
-Berisi class yang merepresentasikan data dalam program, yaitu pasien, petugas, analis, dokter, pemeriksaan, dan hasil pemeriksaan.
+Jenis pemeriksaan dan petugas pada hasil diambil dari pendaftaran terakhir (menu 1), sedangkan ID pasien diinput ulang oleh pengguna.
 
-**View**
-
-`LaboratoriumView` digunakan untuk menampilkan menu, judul, pilihan, informasi data, dan pesan kepada pengguna.
+**Menu 6 - Keluar**: menampilkan pesan penutup dan menghentikan perulangan program.
 
 ---
 
-## 5. Penerapan Encapsulation
+## 3. Penerapan Encapsulation dan Inheritance
 
-Encapsulation diterapkan dengan membuat atribut pada class menjadi `private`.
+### A. Encapsulation
 
-Contohnya pada class `Pasien`:
+Encapsulation diterapkan dengan **menyembunyikan atribut** di dalam class dan hanya membolehkan akses melalui method resmi (**getter** dan **setter**).
+
+**1. Atribut bersifat `private`**
+
+Seluruh atribut pada package `model` berstatus `private`:
+
+| Class | Atribut `private` |
+|---|---|
+| `Pasien` | `id`, `nama`, `umur`, `jenisKelamin`, `keluhan` |
+| `Petugas` | `id`, `nama`, `umur`, `jenisKelamin` |
+| `Analis` | `spesialisasiBidang` |
+| `Dokter` | `nomorSTR` |
+| `Pemeriksaan` | `idPemeriksaan`, `namaPemeriksaan`, `biaya` |
+| `HasilPemeriksaan` | `idHasil`, `idPasien`, `idPemeriksaan`, `idPetugas`, `hasil`, `status` |
 
 ```java
+// Pasien.java
 private String id;
 private String nama;
 private int umur;
@@ -172,11 +146,12 @@ private String jenisKelamin;
 private String keluhan;
 ```
 
-Atribut tersebut tidak dapat diakses secara langsung dari luar class. Untuk mengakses atau mengubah nilainya digunakan getter dan setter.
+Atribut tersebut tidak dapat diakses langsung dari luar class (misalnya dari Controller atau View). Controller dan View harus memakai getter, contohnya `pasien.getNama()` atau `pemeriksaan.getBiaya()`.
 
-Contohnya:
+**2. Getter dan setter bersifat `public`**
 
 ```java
+// Pasien.java
 public String getNama() {
     return nama;
 }
@@ -184,215 +159,416 @@ public String getNama() {
 public void setNama(String nama) {
     if (nama != null && !nama.trim().isEmpty()) {
         this.nama = nama;
+    } else {
+        System.out.println(">> ERROR: Nama tidak boleh kosong!");
     }
 }
 ```
 
-Selain sebagai akses data, setter juga digunakan untuk melakukan validasi.
+**3. Setter berfungsi sebagai validasi**
 
-Contohnya umur tidak boleh bernilai 0 atau negatif:
+Setter tidak hanya mengisi nilai, tetapi juga menyaring data sehingga object selalu berisi data yang valid.
+
+| Setter | Aturan validasi |
+|---|---|
+| `setNama()`, `setJenisKelamin()`, `setKeluhan()`, `setSpesialisasiBidang()`, `setNomorSTR()`, `setNamaPemeriksaan()`, `setHasil()`, `setStatus()` | Tidak boleh `null` atau kosong |
+| `setUmur()` | Harus lebih dari 0 |
+| `setBiaya()` | Tidak boleh negatif |
 
 ```java
-public void setUmur(int umur) {
-    if (umur > 0) {
-        this.umur = umur;
+// Pemeriksaan.java
+public void setBiaya(double biaya) {
+    if (biaya >= 0) {
+        this.biaya = biaya;
+    } else {
+        System.out.println(">> ERROR: Biaya tidak boleh negatif!");
     }
 }
 ```
 
-Dengan demikian, data pada object tetap dikontrol melalui method yang telah disediakan.
+**4. Konstruktor memakai setter**
+
+Agar validasi juga berlaku saat object dibuat, konstruktor memanggil setter, bukan mengisi atribut secara langsung:
+
+```java
+// Pasien.java
+public Pasien(String id, String nama, int umur, String jenisKelamin, String keluhan) {
+    this.id = id;
+    setNama(nama);
+    setUmur(umur);
+    setJenisKelamin(jenisKelamin);
+    setKeluhan(keluhan);
+}
+```
+
+**5. Encapsulation pada Controller dan class `final`**
+
+Daftar data di Controller juga dibuat `private final` (`daftarPasien`, `daftarPetugas`, `daftarPemeriksaan`, `daftarHasil`), sehingga hanya bisa dimodifikasi lewat method Controller seperti `tambahPasien()` dan `hapusPasien()`. Class `HasilPemeriksaan` dideklarasikan `final` agar tidak dapat diturunkan.
 
 ---
 
-## 6. Penerapan Inheritance
+### B. Inheritance
 
-Inheritance diterapkan pada class `Petugas`, `Analis`, dan `Dokter`.
-
-`Petugas` digunakan sebagai superclass, sedangkan `Analis` dan `Dokter` menjadi subclass.
-
-Strukturnya:
+Inheritance diterapkan pada **1 superclass** (`Petugas`) dan **2 subclass** (`Analis` dan `Dokter`).
 
 ```text
-          Petugas
-          /     \
-         /       \
-      Analis    Dokter
+                +---------------------------+
+                |          Petugas          |   <- Superclass
+                +---------------------------+
+                | - id                      |
+                | - nama                    |
+                | - umur                    |
+                | - jenisKelamin            |
+                +---------------------------+
+                | + tampilkanInfo()         |
+                | + tampilkanInfo(boolean)  |
+                +---------------------------+
+                              ^
+                              | extends
+              +---------------+---------------+
+              |                               |
++---------------------------+   +---------------------------+
+|          Analis           |   |          Dokter           |   <- Subclass
++---------------------------+   +---------------------------+
+| - spesialisasiBidang      |   | - nomorSTR                |
++---------------------------+   +---------------------------+
 ```
 
-Class `Petugas` memiliki atribut umum:
+1. **Superclass `Petugas`** menyimpan data dan perilaku yang dimiliki semua petugas: `id`, `nama`, `umur`, `jenisKelamin`, getter/setter, serta method `tampilkanInfo()`.
+2. **Subclass `Analis`** mewarisi `Petugas` dan menambahkan atribut khusus `spesialisasiBidang` (contoh: Hematologi).
+3. **Subclass `Dokter`** mewarisi `Petugas` dan menambahkan atribut khusus `nomorSTR` (nomor Surat Tanda Registrasi).
+
+Pewarisan dituliskan dengan keyword `extends`:
 
 ```java
-private String id;
-private String nama;
-private int umur;
-private String jenisKelamin;
+public class Analis extends Petugas { ... }
+public class Dokter extends Petugas { ... }
 ```
 
-Kemudian class `Analis` mewarisi class `Petugas` menggunakan:
+Konstruktor subclass memanggil konstruktor superclass dengan `super(...)`, lalu mengisi atribut miliknya sendiri lewat setter:
 
 ```java
-public class Analis extends Petugas
+// Analis.java
+public Analis(String id, String nama, int umur, String jenisKelamin, String spesialisasiBidang) {
+    super(id, nama, umur, jenisKelamin);      // mengisi atribut milik Petugas
+    setSpesialisasiBidang(spesialisasiBidang); // mengisi atribut milik Analis
+}
 ```
 
-Sedangkan class `Dokter` menggunakan:
+**Manfaat pewarisan pada program ini:**
 
-```java
-public class Dokter extends Petugas
-```
+- Kode `id`, `nama`, `umur`, `jenisKelamin` cukup ditulis sekali di `Petugas`. `Analis` dan `Dokter` langsung memakainya. Contohnya `analis.getId()` di Controller adalah method yang diwarisi dari `Petugas`.
+- Karena `Analis` dan `Dokter` adalah `Petugas`, keduanya bisa disimpan dalam satu `ArrayList<Petugas>`.
 
-Selain mewarisi atribut dan method dari `Petugas`, masing-masing subclass memiliki atribut khusus.
+**Hubungan dengan encapsulation:** atribut `id` dan `nama` bersifat `private` di `Petugas`, sehingga subclass tidak mengaksesnya langsung. Subclass memakai `super(...)` dan `super.tampilkanInfo()` untuk mendapatkan data tersebut.
 
-Pada `Analis` terdapat:
-
-```java
-private String spesialisasiBidang;
-```
-
-Sedangkan pada `Dokter` terdapat:
-
-```java
-private String nomorSTR;
-```
+> Class `Pasien` berdiri sendiri (tidak mewarisi `Petugas`) karena pasien bukan petugas dan memiliki atribut `keluhan`.
 
 ---
 
-## 7. Penerapan Overriding
+## 4. Penerapan Overriding dan Cara Kerjanya
 
-Overriding diterapkan pada method `tampilkanInfo()` yang terdapat pada class `Petugas`.
+**Overriding** adalah ketika subclass menulis ulang method milik superclass dengan **nama, parameter, dan tipe kembalian yang sama** agar perilakunya sesuai kebutuhan subclass. Pada program ini, overriding diterapkan pada method `tampilkanInfo()` dan `tampilkanInfo(boolean detail)`.
 
-Pada class `Petugas` terdapat:
+### Letak Overriding
+
+| Method di superclass | Class yang meng-override | Lokasi |
+|---|---|---|
+| `Petugas.tampilkanInfo()` | `Analis` | `model/Analis.java` (baris 34-37) |
+| `Petugas.tampilkanInfo()` | `Dokter` | `model/Dokter.java` (baris 33-36) |
+| `Petugas.tampilkanInfo(boolean detail)` | `Analis` | `model/Analis.java` (baris 39-45) |
+| `Petugas.tampilkanInfo(boolean detail)` | `Dokter` | `model/Dokter.java` (baris 38-44) |
+
+Method yang di-override berada di `model/Petugas.java`:
 
 ```java
+// Petugas.java (superclass)
 public String tampilkanInfo() {
     return "ID: " + id + " | Nama: " + nama;
 }
+
+public String tampilkanInfo(boolean detail) {
+    if (!detail) {
+        return tampilkanInfo();
+    }
+    return "ID: " + id + " | Nama: " + nama
+            + " | Umur: " + umur + " | Jenis Kelamin: " + jenisKelamin;
+}
 ```
 
-Kemudian method tersebut dioverride oleh class `Analis`:
+Versi di subclass `Analis`:
 
 ```java
+// Analis.java
 @Override
 public String tampilkanInfo() {
-    return super.tampilkanInfo()
-            + " | Peran: Analis | Spesialisasi/Bidang: "
-            + spesialisasiBidang;
+    return super.tampilkanInfo() + " | Peran: Analis | Spesialisasi/Bidang: " + spesialisasiBidang;
+}
+
+@Override
+public String tampilkanInfo(boolean detail) {
+    if (!detail) {
+        return tampilkanInfo();
+    }
+    return super.tampilkanInfo(true) + " | Peran: Analis | Spesialisasi/Bidang: " + spesialisasiBidang;
 }
 ```
 
-Method tersebut juga dioverride oleh class `Dokter`:
+Versi di subclass `Dokter`:
 
 ```java
+// Dokter.java
 @Override
 public String tampilkanInfo() {
-    return super.tampilkanInfo()
-            + " | Peran: Dokter | No. STR: "
-            + nomorSTR;
+    return super.tampilkanInfo() + " | Peran: Dokter | No. STR: " + nomorSTR;
+}
+
+@Override
+public String tampilkanInfo(boolean detail) {
+    if (!detail) {
+        return tampilkanInfo();
+    }
+    return super.tampilkanInfo(true) + " | Peran: Dokter | No. STR: " + nomorSTR;
 }
 ```
 
-Dengan overriding, masing-masing subclass dapat memberikan tampilan informasi yang berbeda sesuai dengan jenis petugasnya.
+### Cara Kerja Overriding
+
+Overriding dipakai ketika pengguna membuka **Kelola Petugas -> Lihat Semua Petugas** (juga saat memilih petugas pada menu Pendaftaran Pemeriksaan). Kedua fitur tersebut memanggil `tampilkanSemuaPetugas()` di `LaboratoriumController`:
+
+```java
+// LaboratoriumController.java
+private final ArrayList<Petugas> daftarPetugas;   // berisi Analis dan Dokter
+
+public void tampilkanSemuaPetugas() {
+    ...
+    for (Petugas p : daftarPetugas) {
+        view.tampilkanBaris(p.tampilkanInfo(true));
+    }
+}
+```
+
+Langkah kerjanya:
+
+1. Variabel `p` bertipe **`Petugas`**, tetapi object sebenarnya di dalam list bisa berupa `Analis` atau `Dokter`.
+2. Program memanggil `p.tampilkanInfo(true)`. Saat runtime, Java melihat **tipe object sebenarnya** (bukan tipe variabelnya) lalu menjalankan versi method milik class tersebut. Mekanisme ini disebut *dynamic method dispatch*.
+3. Jika object adalah `Analis`, versi `Analis.tampilkanInfo(boolean)` yang berjalan. Karena `detail = true`, method memanggil `super.tampilkanInfo(true)` (mengambil data umum dari `Petugas`: ID, nama, umur, jenis kelamin), lalu menambahkan `Peran: Analis` dan `Spesialisasi/Bidang`.
+4. Jika object adalah `Dokter`, versi `Dokter.tampilkanInfo(boolean)` yang berjalan, dengan tambahan `Peran: Dokter` dan `No. STR`.
+5. Hasilnya, satu perintah yang sama menghasilkan tampilan berbeda sesuai jenis petugasnya.
+
+Contoh output program:
+
+```text
+ID: PT1 | Nama: Asti Putri | Umur: 29 | Jenis Kelamin: Laki-Laki | Peran: Analis | Spesialisasi/Bidang: Hematologi
+------------------------------------
+ID: PT2 | Nama: dr. Hanif Amelia Putri | Umur: 25 | Jenis Kelamin: Perempuan | Peran: Dokter | No. STR: STR-123456789
+------------------------------------
+```
+
+**Peran `super`:** Setiap subclass memakai `super.tampilkanInfo(...)` agar tidak menulis ulang bagian yang sudah ada di `Petugas`. Subclass hanya menambahkan informasi khususnya.
+
+**Versi ringkas (`detail = false`):** Jika `tampilkanInfo(false)` dipanggil pada object `Analis` atau `Dokter`, method akan meneruskan ke `tampilkanInfo()` milik subclass itu sendiri. Hasilnya adalah versi ringkas dengan peran, misalnya:
+
+```text
+ID: PT1 | Nama: Asti Putri | Peran: Analis | Spesialisasi/Bidang: Hematologi
+```
+
+**Tanpa overriding**, semua petugas hanya akan tampil dengan data umum dari `Petugas` tanpa peran, spesialisasi, atau nomor STR.
+
+**Catatan:** Anotasi `@Override` membuat compiler memeriksa bahwa method benar-benar menimpa method milik superclass. Jika nama atau parameternya salah, program tidak dapat dikompilasi.
 
 ---
 
-## 8. Penerapan Polymorphism
+## 5. Nilai Tambah
 
-Polymorphism diterapkan ketika object `Analis` dan `Dokter` disimpan dalam `ArrayList<Petugas>`.
+### A. Arsitektur MVC
 
-Contohnya:
+Program dipisah menjadi beberapa package agar tanggung jawab tiap bagian jelas.
 
-```java
-private final ArrayList<Petugas> daftarPetugas;
+```text
+LaboratoriumKesehatan/src/main/java/
+|
+|-- Main/
+|   '-- Main.java                     <- Titik awal program
+|
+|-- controller/                       <- [CONTROLLER]
+|   '-- LaboratoriumController.java   (alur menu, pengelola ArrayList, pencarian, validasi input)
+|
+|-- model/                            <- [MODEL]
+|   |-- Pasien.java
+|   |-- Petugas.java                  (superclass)
+|   |-- Analis.java                   (subclass Petugas)
+|   |-- Dokter.java                   (subclass Petugas)
+|   |-- Pemeriksaan.java
+|   '-- HasilPemeriksaan.java
+|
+'-- view/                             <- [VIEW]
+    '-- LaboratoriumView.java         (menu, judul, pesan, dan konfirmasi pendaftaran)
 ```
 
-Karena `Analis` dan `Dokter` merupakan turunan dari `Petugas`, keduanya dapat dimasukkan ke dalam `ArrayList<Petugas>`.
+| Package | Peran |
+|---|---|
+| `Main` | Membuat `LaboratoriumController` dan menjalankan `jalankanProgram()`. |
+| `controller` | Menerima input pengguna, mengelola `ArrayList`, dan memanggil View untuk menampilkan hasil. |
+| `model` | Menyimpan struktur data, encapsulation, dan hierarki pewarisan. |
+| `view` | Khusus menampilkan menu dan pesan ke terminal. |
 
-Ketika data petugas ditampilkan:
+### B. Polymorphism dan Overloading
+
+**Polymorphism.** `Analis` dan `Dokter` disimpan dalam satu `ArrayList<Petugas>`:
 
 ```java
-for (Petugas p : daftarPetugas) {
-    view.tampilkanBaris(p.tampilkanInfo(true));
-}
+daftarPetugas.add(analis); // Analis disimpan sebagai Petugas
+daftarPetugas.add(dokter); // Dokter disimpan sebagai Petugas
 ```
 
-Program akan menjalankan method `tampilkanInfo()` sesuai dengan object sebenarnya.
+Saat data ditampilkan, method yang berjalan menyesuaikan object aslinya (lihat [bagian 4](#4-penerapan-overriding-dan-cara-kerjanya)).
 
-Jika object merupakan `Analis`, informasi yang ditampilkan akan menggunakan versi `Analis`.
+**Overloading.** Method dengan nama sama tetapi parameter berbeda dalam satu class:
 
-Jika object merupakan `Dokter`, informasi yang ditampilkan akan menggunakan versi `Dokter`.
+| Class | Method overload |
+|---|---|
+| `Petugas` | `tampilkanInfo()` dan `tampilkanInfo(boolean detail)` |
+| `Pasien` | `tampilkanInfo()` dan `tampilkanInfo(boolean detail)` |
+| `LaboratoriumController` | `bacaInt(Scanner)` dan `bacaInt(Scanner, int min, int max)` |
 
-Hal tersebut menunjukkan penerapan polymorphism dalam program.
+> Perbedaan keduanya: **overloading** terjadi dalam satu class dengan parameter berbeda, sedangkan **overriding** terjadi antara superclass dan subclass dengan parameter yang sama.
+
+### C. Validasi Input
+
+Validasi dilakukan di dua lapis: pada **method baca input di Controller** dan pada **setter di Model**.
+
+| Method | Fungsi |
+|---|---|
+| `bacaInt()` | Memastikan input berupa angka bulat (`try-catch NumberFormatException`) dan berada dalam rentang tertentu |
+| `bacaUmur()` | Umur harus antara 1 sampai 120 |
+| `bacaDouble()` | Memastikan input berupa angka dan tidak negatif (untuk biaya) |
+| `bacaNama()` | Nama tidak boleh kosong dan hanya boleh berisi huruf, spasi, dan titik |
+| `bacaJenisKelamin()` | Hanya menerima `Laki-laki` atau `Perempuan` |
+| `bacaStatus()` | Hanya menerima `Normal` atau `Tidak Normal` |
+| `bacaTeksTidakKosong()` | Teks tidak boleh kosong |
+
+Jika input salah, program meminta pengguna memasukkan ulang tanpa berhenti.
+
+### D. Dummy Data
+
+Saat program pertama kali dijalankan, `isiDataAwal()` mengisi data berikut agar menu *Lihat* langsung menampilkan isi:
+
+| Jenis Data | ID | Isi |
+|---|---|---|
+| Pasien | `P1` | Aulia Ashylla P, 19 tahun, Perempuan, keluhan demam dan batuk sejak 3 hari |
+| Analis | `PT1` | Asti Putri, 29 tahun, spesialisasi Hematologi |
+| Dokter | `PT2` | dr. Hanif Amelia Putri, 25 tahun, STR-123456789 |
+| Pemeriksaan | `PM1` | Tes Darah Lengkap - Rp150.000 |
+| Pemeriksaan | `PM2` | Tes Urine - Rp100.000 |
+| Pemeriksaan | `PM3` | Tes Gula Darah - Rp75.000 |
+| Hasil Pemeriksaan | `H1` | Pasien `P1`, `PM1`, petugas `PT1`, "Hemoglobin 13.5 g/dL, Leukosit normal", status Normal |
 
 ---
 
-## 9. Validasi Input
+## 6. Hasil Output Program (Screenshot)
 
-Program menerapkan validasi input agar data yang dimasukkan pengguna sesuai dengan ketentuan.
+Berikut tampilan program saat dijalankan, berurutan dari menu utama sampai keluar.
 
-Beberapa validasi yang diterapkan antara lain:
+### Menu Utama
 
-### Validasi Nama
+Tampilan pertama saat program dijalankan.
 
-Nama tidak boleh kosong:
+![Menu Utama](screenshots/01-menu-utama.png)
 
-```java
-if (nama != null && !nama.trim().isEmpty()) {
-    this.nama = nama;
-}
-```
+### Menu 1 - Pendaftaran Pemeriksaan
 
-### Validasi Umur
+Pendaftaran dengan **pasien baru**: pengguna mengisi data pasien, lalu memilih pemeriksaan dan petugas.
 
-Umur harus lebih dari 0:
+![Pendaftaran Pasien Baru](screenshots/02-pendaftaran-pasien-baru.png)
 
-```java
-if (umur > 0) {
-    this.umur = umur;
-}
-```
+Pendaftaran dengan **pasien yang sudah terdaftar** dan tampilan konfirmasi pendaftaran.
 
-### Validasi Biaya
+![Pendaftaran Pasien Terdaftar dan Konfirmasi](screenshots/03-pendaftaran-konfirmasi.png)
 
-Biaya pemeriksaan tidak boleh negatif:
+### Menu 2 - Kelola Pasien
 
-```java
-if (biaya >= 0) {
-    this.biaya = biaya;
-}
-```
+Tambah pasien.
 
-### Validasi Input Teks
+![Tambah Pasien](screenshots/04-tambah-pasien.png)
 
-Program juga memiliki method untuk memastikan input teks tidak kosong sehingga pengguna tidak dapat memasukkan data kosong pada bagian yang diperlukan.
+Lihat semua pasien.
 
-Validasi ini membantu mengurangi kesalahan ketika pengguna memasukkan data ke dalam program.
+![Lihat Semua Pasien](screenshots/05-lihat-pasien.png)
+
+Cari pasien berdasarkan ID.
+
+![Cari Pasien](screenshots/06-cari-pasien.png)
+
+Hapus pasien.
+
+![Hapus Pasien](screenshots/07-hapus-pasien.png)
+
+### Menu 3 - Kelola Petugas
+
+Tambah analis.
+
+![Tambah Analis](screenshots/08-tambah-analis.png)
+
+Tambah dokter.
+
+![Tambah Dokter](screenshots/09-tambah-dokter.png)
+
+Lihat semua petugas. Pada tampilan ini terlihat hasil **overriding**: `Analis` menampilkan spesialisasi, sedangkan `Dokter` menampilkan nomor STR.
+
+![Lihat Semua Petugas](screenshots/10-lihat-petugas.png)
+
+### Menu 4 - Kelola Pemeriksaan
+
+Tambah pemeriksaan.
+
+![Tambah Pemeriksaan](screenshots/11-tambah-pemeriksaan.png)
+
+Lihat semua pemeriksaan.
+
+![Lihat Semua Pemeriksaan](screenshots/12-lihat-pemeriksaan.png)
+
+Cari pemeriksaan.
+
+![Cari Pemeriksaan](screenshots/13-cari-pemeriksaan.png)
+
+Ubah pemeriksaan.
+
+![Ubah Pemeriksaan](screenshots/14-ubah-pemeriksaan.png)
+
+Hapus pemeriksaan.
+
+![Hapus Pemeriksaan](screenshots/15-hapus-pemeriksaan.png)
+
+### Menu 5 - Kelola Hasil Pemeriksaan
+
+Input hasil pemeriksaan.
+
+![Input Hasil Pemeriksaan](screenshots/16-input-hasil.png)
+
+Lihat semua hasil.
+
+![Lihat Semua Hasil](screenshots/17-lihat-hasil.png)
+
+Lihat riwayat hasil per pasien.
+
+![Riwayat Hasil per Pasien](screenshots/18-riwayat-hasil.png)
+
+### Validasi Input
+
+Contoh ketika pengguna memasukkan input yang salah (misalnya huruf pada kolom umur, atau jenis kelamin yang tidak valid). Program meminta input diulang dan tidak berhenti.
+
+![Validasi Input](screenshots/19-validasi-input.png)
+
+### Menu 6 - Keluar
+
+Program menampilkan pesan penutup dan berhenti.
+
+![Keluar Program](screenshots/20-keluar.png)
 
 ---
 
-## 10. Dummy Data
-
-Program menyediakan dummy data yang dimasukkan ketika program pertama kali dijalankan.
-
-Dummy data digunakan agar data sudah tersedia ketika pengguna memilih menu lihat tanpa harus memasukkan data terlebih dahulu.
-
-Data awal yang disediakan mencakup:
-
-- Data pasien
-- Data analis
-- Data dokter
-- Data pemeriksaan
-- Data hasil pemeriksaan
-
-Contoh data petugas disimpan dalam:
-
-```java
-ArrayList<Petugas>
-```
-
-Sedangkan data pasien, pemeriksaan, dan hasil pemeriksaan masing-masing disimpan dalam `ArrayList` sesuai dengan class-nya.
-
----
-
-## 11. Konsep PBO yang Diterapkan
+## 7. Konsep PBO yang Diterapkan
 
 Program ini menerapkan beberapa konsep Pemrograman Berorientasi Objek, yaitu:
 
@@ -403,7 +579,8 @@ Program ini menerapkan beberapa konsep Pemrograman Berorientasi Objek, yaitu:
 | Access Modifier | Atribut menggunakan `private` dan method menggunakan `public` |
 | Encapsulation | Data diakses melalui getter dan setter |
 | Inheritance | `Analis` dan `Dokter` mewarisi `Petugas` |
-| Overriding | `tampilkanInfo()` dioverride pada `Analis` dan `Dokter` |
+| Overriding | `tampilkanInfo()` dan `tampilkanInfo(boolean)` dioverride pada `Analis` dan `Dokter` |
+| Overloading | `tampilkanInfo()` dan `tampilkanInfo(boolean)`, serta `bacaInt(Scanner)` dan `bacaInt(Scanner, int, int)` |
 | Polymorphism | `Analis` dan `Dokter` disimpan dalam `ArrayList<Petugas>` |
 | ArrayList | Digunakan untuk menyimpan data selama program berjalan |
 | Validasi | Digunakan untuk memeriksa input pengguna |
@@ -411,7 +588,8 @@ Program ini menerapkan beberapa konsep Pemrograman Berorientasi Objek, yaitu:
 
 ---
 
-## 12. Kesimpulan
+
+## 8. Kesimpulan
 
 Program Sistem Manajemen Laboratorium Kesehatan merupakan pengembangan dari Mini Project 1 yang menambahkan penerapan konsep Pemrograman Berorientasi Objek.
 
